@@ -17,35 +17,35 @@ pipeline {
                 echo "Building.... ${env.PIPELINE_TYPE}"
             }
         }
-        
+
         stage('Test') {
             when {
-                expression { "${env.PIPELINE_TYPE}" == 'develop' }
+                expression { "${env.BRANCH_NAME}" == 'develop' }
             }
             steps {
-                echo "Testing.. ${env.PIPELINE_TYPE}"
+                echo "Testing.. ${env.BRANCH_NAME}"
             }
         }
         stage('Deploy for Testing') {
             when {
-                expression { "${env.PIPELINE_TYPE}" == 'release'}
+                expression { "${env.BRANCH_NAME}" == 'release'}
             }
             steps {
-                echo "Deploying.... ${env.PIPELINE_TYPE}"
+                echo "Deploying.... ${env.BRANCH_NAME}"
             }
         }
         stage('Deploy') {
             when {
-                expression { "${env.PIPELINE_TYPE}" == 'main'}
+                expression { "${env.BRANCH_NAME}" == 'main'}
             }
             steps {
-                echo "Deploying.... ${env.PIPELINE_TYPE}"
+                echo "Deploying.... ${env.BRANCH_NAME}"
             }
         }
     }
      post {
         always {
-            echo "Cleaning up workspace... ${env.PIPELINE_TYPE}"
+            echo "Cleaning up workspace... ${env.BRANCH_NAME}"
             cleanWs()
         }
         success {
