@@ -43,6 +43,7 @@ pipeline {
             }
         }
     }
+    
      post {
         always {
             echo "Cleaning up workspace... ${env.BRANCH_NAME}"
