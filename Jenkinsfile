@@ -22,7 +22,15 @@ pipeline {
                 expression { "${env.PIPELINE_TYPE}" == 'develop' }
             }
             steps {
-                echo 'Testing.. ${env.PIPELINE_TYPE}'
+                echo "Testing.. ${env.PIPELINE_TYPE}"
+            }
+        }
+        stage('Deploy for Testing') {
+            when {
+                expression { "${env.PIPELINE_TYPE}" == 'release'}
+            }
+            steps {
+                echo "Deploying.... ${env.PIPELINE_TYPE}"
             }
         }
         stage('Deploy') {
@@ -30,13 +38,13 @@ pipeline {
                 expression { "${env.PIPELINE_TYPE}" == 'main'}
             }
             steps {
-                echo 'Deploying.... ${env.PIPELINE_TYPE}'
+                echo "Deploying.... ${env.PIPELINE_TYPE}"
             }
         }
     }
      post {
         always {
-            echo "Cleaning up workspace..."
+            echo "Cleaning up workspace... ${env.PIPELINE_TYPE}"
             cleanWs()
         }
         success {
