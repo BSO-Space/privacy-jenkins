@@ -17,6 +17,7 @@ pipeline {
                 echo "Building.... ${env.PIPELINE_TYPE}"
             }
         }
+        
         stage('Test') {
             when {
                 expression { "${env.PIPELINE_TYPE}" == 'develop' }
