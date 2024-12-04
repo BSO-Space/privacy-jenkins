@@ -20,7 +20,7 @@ pipeline {
 
         stage('Test') {
             when {
-                expression { "${env.BRANCH_NAME}" == 'develop' }
+                expression { "${env.BRANCH_NAME}" == 'release' }
             }
             steps {
                 echo "Testing.. ${env.BRANCH_NAME}"
@@ -43,8 +43,6 @@ pipeline {
             }
         }
     }
-    
-    
 
      post {
         always {
