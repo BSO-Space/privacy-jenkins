@@ -34,5 +34,19 @@ pipeline {
             }
         }
     }
-    
+     post {
+        always {
+            echo "Cleaning up workspace..."
+            cleanWs()
+        }
+        success {
+            echo "Pipeline succeeded!"
+        }
+        failure {
+            echo "Pipeline failed."
+        }
+        unstable {
+            echo "Pipeline is unstable."
+        }
+    }
 }
