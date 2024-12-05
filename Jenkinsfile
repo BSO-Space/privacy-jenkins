@@ -20,23 +20,19 @@ pipeline {
 
         stage('Test') {
             when {
-                expression { "${env.BRANCH_NAME}" == 'develop' }
+                branch 'develop'
             }
             steps {
                 echo "Testing.. ${env.BRANCH_NAME}"
             }
         }
-        stage('Deploy for Testing') {
-            when {
-                expression { "${env.BRANCH_NAME}" == 'release'}
-            }
-            steps {
-                echo "Deploying.... ${env.BRANCH_NAME}"
-            }
-        }
+        
         stage('Deploy') {
             when {
-                expression { "${env.BRANCH_NAME}" == 'main'}
+                anyOf {
+                    branch 'main'
+                    branch 'release'
+                }
             }
             steps {
                 echo "Deploying.... ${env.BRANCH_NAME}"
