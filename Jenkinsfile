@@ -1,27 +1,7 @@
     pipeline {
         agent any
 
-        parameters {
-            string(name: 'BRANCH', defaultValue: 'main', description: 'Branch to build')
-            choice(name: 'PIPELINE_TYPE', choices: ['main', 'develop', 'release'], description: 'Type of pipeline to execute')
-        }
-
-        environment {
-            PROJECT_NAME = "private-jenkins"
-            ARTIFACTS_DIR = "artifacts"
-        }
-
-        stages {
-            stage('Build') {
-                steps {
-                    echo "Building.... ${env.PIPELINE_TYPE}"
-                }
-            }
-
-            stage('Test') {
-                when {
-                    branch 'develop'
-                }
+       
                 steps {
                     echo "Testing.. ${env.BRANCH_NAME}"
                 }
